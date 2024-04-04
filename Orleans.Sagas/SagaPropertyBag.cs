@@ -3,10 +3,14 @@ using System.Collections.Generic;
 
 namespace Orleans.Sagas
 {
+    [GenerateSerializer]
+    [Alias("Orleans.Sagas.SagaPropertyBag")]
     class SagaPropertyBag : ISagaPropertyBag
     {
+        [Id(0)]
         private readonly Dictionary<string, string> existingProperties;
 
+        [Id(1)]
         public Dictionary<string, string> ContextProperties { get; }
 
         public SagaPropertyBag() : this(new Dictionary<string, string>())
