@@ -1,5 +1,6 @@
 ﻿namespace Orleans.Sagas
 {
+    [GenerateSerializer]
     public enum SagaStatus
     {
         /// <summary>
