@@ -1,0 +1,54 @@
+trigger:
+  branches:
+    include:
+      - '*'
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+- group: NuGetGroup
+
+steps:
+- task: UseDotNet@2
+  displayName: 'Setup .NET 9'
+  inputs:
+    packageType: 'sdk'
+    version: '9.0.x'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Install dependencies'
+  inputs:
+    command: 'restore'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Build'
+  inputs:
+    command: 'build'
+    arguments: '--configuration Release --no-restore'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Pack'
+  inputs:
+    command: 'pack'
+    packDirectory: '$(Build.ArtifactStagingDirectory)'
+    arguments: '--configuration Release --no-build --output $(Build.ArtifactStagingDirectory)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Test'
+  inputs:
+    command: 'test'
+    arguments: '--no-restore --verbosity normal'
+
+- task: NuGetAuthenticate@1
+  inputs:
+    feedUrl: '$(NuGetFeed)'
+
+- task: NuGetCommand@2
+  displayName: 'Push packages to Azure DevOps feed'
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    nuGetFeedType: 'internal'
+    allowPackageConflicts: true
+    publishVstsFeed: '$(PublishFeed)'

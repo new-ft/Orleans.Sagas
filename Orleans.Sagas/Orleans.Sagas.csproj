@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>$(DefaultTargetFrameworkVersion)</TargetFramework>
-    <Version>0.0.46-pre</Version>
+    <TargetFrameworks>$(DefaultTargetFrameworkVersion)</TargetFrameworks>
     <Description>A distributed saga implementation for Orleans</Description>
   </PropertyGroup>
 
