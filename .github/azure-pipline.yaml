@@ -14,7 +14,7 @@ steps:
   displayName: 'Setup .NET 10'
   inputs:
     packageType: 'sdk'
-    version: '10.0.x'
+    useGlobalJson: true
 
 - task: DotNetCoreCLI@2
   displayName: 'Install dependencies'
