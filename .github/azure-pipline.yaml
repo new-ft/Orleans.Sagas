@@ -11,10 +11,10 @@ variables:
 
 steps:
 - task: UseDotNet@2
-  displayName: 'Setup .NET 9'
+  displayName: 'Setup .NET 10'
   inputs:
     packageType: 'sdk'
-    version: '9.0.x'
+    version: '10.0.x'
 
 - task: DotNetCoreCLI@2
   displayName: 'Install dependencies'
