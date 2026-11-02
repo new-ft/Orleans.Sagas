@@ -16,6 +16,7 @@ namespace Orleans.Sagas.Samples.Activities
             CustomErrorCode = code;
         }
 
+        [Obsolete("Formatter-based serialization is obsolete.")]
         protected CustomException(System.Runtime.Serialization.SerializationInfo serializationInfo, System.Runtime.Serialization.StreamingContext streamingContext) : base(serializationInfo, streamingContext)
         {
         }

@@ -28,16 +28,12 @@ Install the [NuGet package](https://www.nuget.org/packages/Orleans.Sagas) with a
 ## Configuring Orleans for sagas
 1. Configure a default storage provider
 2. Configure a reminder storage provider
-3. Add the following statements to your Orleans silo builder:
+3. Add sagas to your Orleans silo builder:
 ```csharp
 .UseOrleans(siloBuilder =>
 {
     siloBuilder
         .UseSagas()
-        .ConfigureApplicationParts(parts =>
-        {
-            parts.AddSagaParts();
-        })
         ...
 }
 ```
